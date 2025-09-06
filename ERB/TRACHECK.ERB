@@ -10,18 +10,18 @@ SELECTCASE SAVESTR:ゲームフェイズ管理
 			;うふふ系の派生は5分刻み
 			SPLIT RSTR:SELECTCOM_S受け渡し, "_", LOCALS
 			IF ISNUMERIC(LOCALS) && TOINT(LOCALS) < 200
-				TIME += 5
+				TIME += 1
 			ENDIF
 		ELSEIF SELECTCOM < 200
 			IF PLAYER >= 0 && TALENT:PLAYER:絶倫 && RAND:3 == 0
 			ELSE
 				;めんどくさいので5分刻み
-				TIME += 5
+				TIME += 1
 			ENDIF
 		ENDIF
 	CASE "マッサージモード"
 		;技能に応じて増減
-		TIME += MAX(3, 15 - ABL:PLAYER:マッサージ技能 * 2)
+		TIME += 1
 ENDSELECT
 ;-------------------------------------------------
 ;処女喪失時の処理
@@ -327,7 +327,7 @@ IF TALENT:ARG:Ａ処女 == 1
 			ENDIF
 		ENDIF
 	ELSE
-		IF TALENT:ARG:貞操 > 0 && ARG:1 >= 0
+		IF TALENT:ARG:貞操 > 0
 			;非恋慕
 			IF DT_SELECT("関係性データベース", @"(対象キャラ１ = {CFLAG:ARG:人物番号} Or 対象キャラ２ = {CFLAG:ARG:人物番号}) And (対象キャラ１ = {CFLAG:(ARG:1):人物番号} Or 対象キャラ２ = {CFLAG:(ARG:1):人物番号}) And 関係性種別 = '恋慕'") == 0
 				CALL SOURCE_CALC_不潔(ARG, ARG:1, 1000)
@@ -335,7 +335,7 @@ IF TALENT:ARG:Ａ処女 == 1
 			ELSEIF ARG:2 != 1
 				CALL SOURCE_CALC_不潔(ARG, ARG:1, 500)
 			ENDIF
-		ELSEIF TALENT:ARG:貞操 == 0 && ARG:1 >= 0
+		ELSEIF TALENT:ARG:貞操 == 0
 			;非恋慕
 			IF DT_SELECT("関係性データベース", @"(対象キャラ１ = {CFLAG:ARG:人物番号} Or 対象キャラ２ = {CFLAG:ARG:人物番号}) And (対象キャラ１ = {CFLAG:(ARG:1):人物番号} Or 対象キャラ２ = {CFLAG:(ARG:1):人物番号}) And 関係性種別 = '恋慕'") == 0
 				CALL SOURCE_CALC_不潔(ARG, ARG:1, 500)

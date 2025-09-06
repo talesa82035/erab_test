@@ -41,12 +41,12 @@ SELECTCASE ABL:PLAYER:話術技能
 	CASE 4
 		LOCAL = 50
 	CASEELSE
-		LOCAL = 80
+		LOCAL = 380
 ENDSELECT
 
 IF RFLAG:コマンド結果受渡し変数 == 2 && TALENT:TARGET:性欲 > -2
 	;ノった場合は性欲上昇
-	BASE:TARGET:性欲 += ABL:PLAYER:話術技能 * 30 + 10
+	BASE:TARGET:性欲 += ABL:PLAYER:話術技能 * 30 + 100
 ENDIF
 
 SELECTCASE RFLAG:コマンド結果受渡し変数２
@@ -172,9 +172,9 @@ CALL SOURCE_CALC_征服(TARGET, PLAYER, LOCAL:1)
 
 ;会話累積値
 LOCAL = 200 - (TALENT:TARGET:会話資質 * 50) - (TALENT:PLAYER:会話資質 * 50)
-TCVAR:会話累積値 += LOCAL / (3 + ABL:PLAYER:話術技能 + TALENT:TARGET:陽気／陰気)
+TCVAR:会話累積値 += 0
 
-TIME += 15
+TIME += 0
 EXP:PLAYER:会話経験 ++
 RETURN 1
 

@@ -25,13 +25,13 @@ TSTR:ツールチップ受渡 = %LOCALS%
 IF TCVAR:話題無しフラグ && !TALENT:恋慕 && TFLAG:調教モード != 3
 	PRINTFORML %CALLNAME:TARGET%に話しかけようとしたが言葉が見つからない
 	PRINTW あたりに気まずい空気が流れた…
-	TIME += 10
+	TIME += 0
 	;口上分岐としてはここは大失敗扱いがいいんじゃないかな
 	RFLAG:コマンド結果受渡し変数 = -2
 	RETURN 0
 ENDIF
 
-LOCAL = RAND:100
+LOCAL = 0
 LOCAL:1 = 90 + GET_SUCCESS_RATE() / 5
 SIF LOCAL:1 > 99
 	LOCAL:1 = 99
@@ -49,7 +49,7 @@ ENDIF
 
 
 ;歓楽強度
-LOCAL:0 = 300
+LOCAL:0 = 1300
 ;征服強度
 LOCAL:1 = 50
 
@@ -80,8 +80,8 @@ SELECTCASE ABL:MASTER:話術技能
 		TIMES LOCAL:0 , 1.50
 		TIMES LOCAL:1 , 1.50
 	CASEELSE
-		TIMES LOCAL:0 , 2.00
-		TIMES LOCAL:1 , 2.00
+		TIMES LOCAL:0 , 5.00
+		TIMES LOCAL:1 , 5.00
 ENDSELECT
 
 
@@ -91,9 +91,9 @@ CALL SOURCE_CALC_好感度要素_友情度UP(TARGET, PLAYER, LOCAL:0 / 2)
 
 ;会話累積値
 LOCAL = 200 - (TALENT:TARGET:会話資質 * 50) - (TALENT:PLAYER:会話資質 * 50)
-TCVAR:会話累積値 += LOCAL / (3 + ABL:MASTER:話術技能 + TALENT:TARGET:陽気／陰気)
+TCVAR:会話累積値 += 0
 
-TIME += 15
+TIME += 0
 EXP:MASTER:会話経験 ++
 RETURN 1
 

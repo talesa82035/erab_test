@@ -20,7 +20,7 @@ TSTR:ツールチップ受渡 = %LOCALS%
 
 @COM302
 ;スキンシップ
-LOCAL = RAND:100
+LOCAL = 0
 LOCAL:1 = 90 + GET_SUCCESS_RATE() / 5
 SIF LOCAL:1 > 99
 	LOCAL:1 = 99
@@ -35,9 +35,6 @@ ELSE
 	RFLAG:コマンド結果受渡し変数 = 0
 ENDIF
 
-
-
-
 ;歓楽強度
 LOCAL:0 = 200
 ;征服
@@ -49,8 +46,8 @@ ELSEIF RFLAG:コマンド結果受渡し変数 == 0
 	TIMES LOCAL:0 , 1.00
 	TIMES LOCAL:1 , 1.00
 ELSE
-	TIMES LOCAL:0 , 2.00
-	TIMES LOCAL:1 , 2.00
+	TIMES LOCAL:0 , 5.00
+	TIMES LOCAL:1 , 5.00
 ENDIF
 
 
@@ -65,7 +62,7 @@ ELSE
 	CALL SOURCE_CALC_好感度要素_恋心度UP(TARGET, PLAYER, LOCAL:0 / 5)
 	CALL SOURCE_CALC_好感度要素_性愛度UP(TARGET, PLAYER, LOCAL:0 / 3)
 ENDIF
-TIME += 15
+TIME += 0
 RETURN 1
 
 ;-------------------------------------------------

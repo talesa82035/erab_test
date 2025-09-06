@@ -55,16 +55,16 @@ FOR LOCAL, 1, CHARANUM
 	TCVAR:(飲み会TARGET:LOCAL):摂取カロリー += 250
 NEXT
 
-EXP:MASTER:飲酒経験 += RAND:5 + 1
+EXP:MASTER:飲酒経験 += 100
 
 ;酔い強度
-BASE:MASTER:酩酊 += RAND:100 + RAND:100 + 100
+BASE:MASTER:酩酊 += 0
 SIF BASE:MASTER:酩酊 >= 1000
 	CFLAG:MASTER:酔いすぎ = 1
 
-TCVAR:MASTER:摂取カロリー += 250
+TCVAR:MASTER:摂取カロリー += 25
 
-TIME += 15
+TIME += 0
 
 
 ;-------------------------------------------------

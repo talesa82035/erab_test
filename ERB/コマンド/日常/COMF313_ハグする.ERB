@@ -20,7 +20,7 @@ TSTR:ツールチップ受渡 = %LOCALS%
 
 @COM313
 ;スキンシップ
-LOCAL = RAND:100
+LOCAL = 0
 LOCAL:1 = 90 + GET_SUCCESS_RATE() / 5
 SIF LOCAL:1 > 99
 	LOCAL:1 = 99
@@ -38,7 +38,7 @@ ENDIF
 
 
 ;歓楽強度
-LOCAL:0 = 200
+LOCAL:0 = 600
 ;征服
 LOCAL:1 = 100
 IF RFLAG:コマンド結果受渡し変数 == -1
@@ -70,7 +70,7 @@ IF GETBIT(TALENT:PLAYER:性別, 0) && GETBIT(TALENT:TARGET:性別, 1)
 	CALL SOURCE_CALC_好感度要素_性愛度UP(TARGET, PLAYER, LOCAL:0 / 3)
 ENDIF
 
-TIME += 5
+TIME += 0
 
 RETURN 1
 

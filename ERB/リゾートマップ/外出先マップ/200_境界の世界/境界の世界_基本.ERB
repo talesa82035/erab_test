@@ -1,0 +1,118 @@
+﻿
+@MAP_VIEWING_200(AA)
+#DIMS REF AA, 0
+TRYCALLFORM MAP_RESORT_200_{TFLAG:マップ種別}(AA)
+
+@エリア情報登録_200(ARGS)
+SELECTCASE ARGS
+	CASE "エリア名"
+		TSTR:場所名受渡 = 境界の民の村
+	CASE "エリア移動可能場所"
+		RETURN 1
+ENDSELECT
+
+@外出先_登場キャラ設定_200(対象キャラ)
+#DIM 対象キャラ
+
+SIF GROUPMATCH(NO:対象キャラ, 997, 410)
+	RETURN 1
+
+RETURN 0
+
+
+@MAP_RESORT_200_0(AA)
+#DIMS REF AA, 0
+#DIM MAP
+
+MAP = 0
+AA:(MAP++) = 　
+AA:(MAP++) = 　　┌─────┐
+AA:(MAP++) = 　　│　　　　　│
+AA:(MAP++) = 　　│　　01　　│
+AA:(MAP++) = 　　│　　　　　│　　　　　　　　　　　　　　　　　　┌───┐
+AA:(MAP++) = 　　└─────┘　　　　　　　　　　　　　　　　　　│　　　│
+AA:(MAP++) = 　　　　　　　　　　　　　　　　　　　　　　　　　　　│　02　│
+AA:(MAP++) = 　　　　　　　　　　　　　　　　　　　　　　　　　　　│　　　│
+AA:(MAP++) = 　　　　　　　　　　　　　　┌───┐　　　　　　　　└───┘
+AA:(MAP++) = 　　　　　　　　　　　　　　│　　　│
+AA:(MAP++) = 　　　　　　　　　　　　　　└───┘
+AA:(MAP++) = 　　　　　┌─┐　
+AA:(MAP++) = 　　　　　│　│
+AA:(MAP++) = 　　　　　│　│　　　　　　　　　　　　　　　┌─┐
+AA:(MAP++) = 　　　　　│　│　　　　　　　　　　　　　　　│　│
+AA:(MAP++) = 　　　　　│　└───┐　　　　　　　　　　　└─┘
+AA:(MAP++) = 　　　　　│03　　　　│
+AA:(MAP++) = 　　　　　└─────┘
+AA:(MAP++) = 
+AA:(MAP++) = 　　　　≡≡≡≡≡≡≡≡≡　　　　　　　　　　　┌───┐
+AA:(MAP++) = 　　　　≡≡≡≡≡≡≡≡≡　　　　　　　　　　　│　　　│
+AA:(MAP++) = 　　　　≡≡≡≡畑≡≡≡≡　　　　　　　　　　　│　　　│
+AA:(MAP++) = 　　　　≡≡≡≡≡≡≡≡≡　　　　　　　　　　　│　04　│
+AA:(MAP++) = 　　　　≡≡≡≡≡≡≡≡≡　　　　　　　　　　　│　　　│
+AA:(MAP++) = 　　　　　　　　　　　　　　　　　　　　　　　　│　　　│
+AA:(MAP++) = 　　　　≡≡≡≡≡≡≡≡≡　　　　　　　　　　　└───┘
+AA:(MAP++) = 　　　　≡≡≡≡≡≡≡≡≡　　　　　　　　　　　　　　　┌─┐
+AA:(MAP++) = 　　　　≡≡≡≡畑≡≡≡≡　　　　　　　　　　　　　　　│　│
+AA:(MAP++) = 　　　　≡≡≡≡≡≡≡≡≡　　　　　　　　　　　　　　　└─┘
+AA:(MAP++) = 　　　　≡≡≡≡≡≡≡≡≡
+AA:(MAP++) = 　
+AA:(MAP++) = 　
+AA:(MAP++) = 01：タピィラの家　　　02：ミカとシトリの家　03：民家　　　　　　　04：空き家
+
+
+
+@GETPLACENAME_200_0(ARG)
+#FUNCTION
+SELECTCASE ARG
+	CASE 1
+		TSTR:場所名受渡 = タピィラの家
+	CASE 2
+		TSTR:場所名受渡 = ミカとシトリの家
+	CASE 3
+		TSTR:場所名受渡 = 民家
+	CASE 4
+		TSTR:場所名受渡 = 空き家
+ENDSELECT
+
+@DRAW_MAP_BG_200_0(SLICED, 表示文字列)
+#DIMS REF 表示文字列
+#DIMS SLICED
+#DIM 改行フラグ
+
+SELECTCASE SLICED
+	CASE "≡"
+		表示文字列 += @"<font color='#ce0000'>%SLICED%</font>"
+	CASE "畑"
+		表示文字列 += @"<font color='#ce0000'>%SLICED%</font>"
+	;ふつうの
+	CASEELSE
+		表示文字列 += @"%SLICED%"
+ENDSELECT
+
+
+; @エリア来訪時イベント_200
+
+; IF 境界の民の村初来訪イベントフラグ == 0
+; 	DRAWLINE
+; 	PRINTL ［初来訪：境界の世界］
+; 	DRAWLINE
+; 	PRINTW
+; 	PRINTFORMW %CALLNAME:PLAYER%は島を開拓し、空いたエリアに生成した海を訪れた。
+; 	PRINTFORMW 既に何人かの耳の早い観光客が訪れており、波打ち際で遊んだり海の家で食事を楽しんでいる。
+; 	PRINTL 
+; 	PRINTFORMW 星晶獣の力とZPを駆使して作られた海は美しく、寄せては返す静かな波を湛えている。
+; 	PRINTFORMW 今はまだ何の変哲もない海水浴場だが、いずれはもっとレジャー要素を増やしてもいいだろう。
+; 	PRINTFORMW 深海の古戦場ダンジョンのように海中を散歩したり、船で沖合に出て釣りをしたり、色々と考えられそうだ（※未実装です）
+; 	PRINTL
+; 	PRINTFORMW また、今は普通の魚しか生息していないが、いずれはアウギュステのような海産物が発生するかもしれない。（※未実装です）
+; 	PRINTFORMW それはそれで名産になりそうだが……リゾート地としては対策を考えておかなければならないだろう。
+; 	PRINTFORMW とはいえ今は難しいことを考えず。
+; 	PRINTFORMW 日差しの下、健康的に海で遊ぶのが良さそうだ。
+; 	PRINTL
+; 	SETCOLOR カラーパレット("黄")
+; 	PRINTFORMW 境界の世界の完成により通常衣装「水着」を入手した。
+; 	PRINTFORMW 境界の世界の完成により通常衣装「ユカタヴィラ」を入手した。
+; 	RESETCOLOR
+; 	境界の民の村初来訪イベントフラグ = 1
+; ENDIF
+

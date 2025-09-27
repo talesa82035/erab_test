@@ -59,6 +59,7 @@ NEXT
 #DIM キャラ番号取得
 #DIM キャラ番号取得１
 #DIM キャラ番号取得２
+#DIMS 母乳種別
 
 
 ; CALL 夜這い実処理(1, 0, 0, "恋慕")
@@ -88,7 +89,8 @@ NEXT
 ; 知識素質:98:性知識=0
 ; CFLAG:98:ゲージ起動分類=1
 
-CALL MOVE_ROUTINE_FESTIVAL_ハロウィンパーティ(1, "服装変更")
-PRINTFORMW %RSTR:服装名受け渡し%
+; CALL MOVE_ROUTINE_FESTIVAL_ハロウィンパーティ(1, "服装変更")
+; PRINTFORMW %RSTR:服装名受け渡し%
 
-
+FLAG:お出かけ先フラグ = 200
+CALL 素材入手処理("スナック菓子の詰め合わせセット")
